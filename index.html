@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Hospital Care</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#doctors">Doctors</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="home-content">
+            <h1>Welcome to Hospital Care</h1>
+            <p>We provide quality health care to all.</p>
+            <a href="#contact" class="button">Contact Us</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Emergency Care</h3>
+                <p>24/7 emergency services available for all critical needs.</p>
+            </div>
+            <div class="service-card">
+                <h3>Pediatrics</h3>
+                <p>Comprehensive care for children from infants to adolescents.</p>
+            </div>
+            <div class="service-card">
+                <h3>Cardiology</h3>
+                <p>State-of-the-art heart care facilities and specialists.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors">
+        <h2>Our Doctors</h2>
+        <div class="doctor-grid">
+            <div class="doctor-card">
+                <img src="doctor1.jpg" alt="Dr. Jane Doe">
+                <h3>Dr. Jane Doe</h3>
+                <p>Cardiologist</p>
+            </div>
+            <div class="doctor-card">
+                <img src="doctor2.jpg" alt="Dr. John Smith">
+                <h3>Dr. John Smith</h3>
+                <p>Pediatrician</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="submit_form.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit" class="button">Send Message</button>
+        </form>
+    </section>
+        <!-- Chatbot Section -->
+        <div class="chatbot">
+            <div class="chatbot-header">
+                <h4>Chat with Us</h4>
+                <button class="close-chatbot">x</button>
+            </div>
+            <div class="chatbot-body">
+                <div class="messages">
+                    <!-- Placeholder for chatbot messages -->
+                </div>
+                <div class="chatbot-input">
+                    <input type="text" placeholder="Type a message..." />
+                    <button>Send</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Chatbot Toggle Button -->
+        <div class="chatbot-toggle">
+            <img src="chat-icon.png" alt="Chat" />
+        </div>
+    
+        <script src="script.js"></script>
+
+    <footer>
+        <p>&copy; 2024 Hospital Care. All rights reserved.</p>
+    </footer>
+    </body>
+    </html>
+
