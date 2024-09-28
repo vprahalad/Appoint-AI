@@ -1,0 +1,44 @@
+body {
+    background-color: #7ba9ef;
+    font-family: 'Arial', sans-serif;
+}
+.title {
+    text-align: center;
+    color: #3b87c6e3; 
+    font-size: 2.5em;
+}
+.header {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+.uploaded-file {
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+    border: 2px dashed #3b87c6e3; 
+    border-radius: 10px;
+    background-color: #e7f3ff; 
+    color: #3b87c6e3; 
+}
+.patient-list {
+    margin: 20px auto;
+    width: 80%;
+    border-collapse: collapse;
+}
+.patient-list th, .patient-list td {
+    border: 1px solid #3b87c6e3;
+    padding: 8px;
+    text-align: center;
+    color: #343a40; 
+}
+.patient-list th {
+    background-color: #3b87c6e3; 
+    color: white;
+}
+.patient-list tr {
+    background-color: #f1f1f1;
+}
+.patient-list tr:hover {
+    background-color: #d1ecf1;
+}
