@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import random
 from datetime import datetime, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 def load_css(file_name):
     with open(file_name) as f:
@@ -15,6 +18,28 @@ st.markdown('<h1 class="title">Patient Appointment Scheduler</h1>', unsafe_allow
 uploaded_file = st.file_uploader("Upload your CSV file", type="csv", label_visibility="collapsed")
 
 num_weeks = st.number_input("Enter number of weeks for appointment scheduling:", min_value=1, value=1)
+
+# Function to send email
+def send_email(to_email, subject, body):
+    from_email = "your_email@example.com"  # Your email address
+    from_password = "your_email_password"   # Your email password
+
+    msg = MIMEMultipart()
+    msg['From'] = from_email
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(from_email, from_password)
+        server.send_message(msg)
+        server.quit()
+        print(f"Email sent successfully to {to_email}!")
+    except Exception as e:
+        print(f"Failed to send email to {to_email}: {e}")
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
@@ -31,10 +56,16 @@ if uploaded_file is not None:
 
     for i in range(len(df_sorted)):
         appointment_date = start_date + timedelta(days=random.randint(0, num_weeks * 7 - 1))
-        appointment_dates.append(appointment_date.strftime('%Y-%m-%d'))  
+        appointment_dates.append(appointment_date.strftime('%Y-%m-%d'))
 
     df_sorted['appointment_date'] = sorted(appointment_dates)
     df_sorted['appointment_time'] = [random.choice(appointment_times) for _ in range(len(df_sorted))]
+
+    # Sending emails to patients
+    for index, row in df_sorted.iterrows():
+        patient_email = row['email']  # Ensure your CSV has an 'email' column
+        appointment_details = f"Dear {row['name']},\n\nYour appointment is scheduled for {row['appointment_date']} at {row['appointment_time']}.\n\nBest regards,\nYour Clinic"
+        send_email(patient_email, "Appointment Confirmation", appointment_details)
 
     st.markdown('<h2 class="header">Sorted Patient List</h2>', unsafe_allow_html=True)
     st.write(df_sorted.to_html(classes='patient-list', index=False), unsafe_allow_html=True)
