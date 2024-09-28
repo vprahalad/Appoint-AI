@@ -7,24 +7,16 @@ import pickle
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-# Load tokenizer and model
+
+# Load model
 def load_model(model_path):
     model = tf.keras.models.load_model(model_path)
     return model
 
-# Predicts urgency
-def predict_urgency(symptoms, tokenizer, model):
-    sequences = tokenizer.texts_to_sequences([symptoms])
-    X_input = pad_sequences(sequences, maxlen=100)
-    
-    prediction = model.predict(X_input)
-    predicted_class_index = np.argmax(prediction, axis=1)[0]
-    
-    return predicted_class_index + 1  # (1 to 5)
-
+# Function to send email
 def send_email(to_email, subject, body):
-    from_email = "ayahzaheraldeen@gmail.com"  
-    from_password = "iydk iszv lkvg aecx"      
+    from_email = "ayahzaheraldeen@gmail.com"  # Your email address
+    from_password = "your_app_password"        # Your app password
 
     msg = MIMEMultipart()
     msg['From'] = from_email
@@ -41,6 +33,16 @@ def send_email(to_email, subject, body):
         print(f"Email sent successfully to {to_email}!")
     except Exception as e:
         print(f"Failed to send email to {to_email}: {e}")
+
+# Predicts urgency
+def predict_urgency(symptoms, tokenizer, model):
+    sequences = tokenizer.texts_to_sequences([symptoms])
+    X_input = pad_sequences(sequences, maxlen=100)
+    
+    prediction = model.predict(X_input)
+    predicted_class_index = np.argmax(prediction, axis=1)[0]
+    
+    return predicted_class_index + 1  # (1 to 5)
 
 st.title("Patient Urgency Score Predictor")
 
@@ -75,17 +77,22 @@ if st.button("Submit"):
 
     st.write("Your information has been saved!")
 
-    # Display appointment if the email is in the CSV
-    df_appointments = pd.read_csv('test_data.csv')  # Load appointment data
+    # Load appointment data
+    df_appointments = pd.read_csv('test_data.csv')  
     patient_appointment = df_appointments[df_appointments['email'] == patient_email]
 
     if not patient_appointment.empty:
         st.write("Your Appointment Details:")
         st.write(patient_appointment)
 
+        # Confirmation buttons
         confirm = st.button("Confirm Appointment")
+        decline = st.button("Decline Appointment")
 
         if confirm:
             appointment_details = f"Dear {patient_name},\n\nYour appointment has been confirmed.\n\nBest regards,\nYour Clinic"
             send_email(patient_email, "Appointment Confirmation", appointment_details)
             st.success("Appointment confirmed and email sent!")
+
+        elif decline:
+            st.warning("You have declined the appointment.")
