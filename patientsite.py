@@ -27,10 +27,6 @@ def predict_urgency(symptoms, tokenizer, model):
     
     return predicted_class_index + 1  # (1 to 5)
 
-# col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12 = st.columns(12) #columnize the output
-# with col4:
-#     st.image("logo.png", width=300)
-
 col = st.columns(24)[7]  # 7th column
 with col:
     st.image("logo.png", width=300)
@@ -49,7 +45,7 @@ st.markdown(
 
 
 def load_css():
-    with open("style.css") as f:
+    with open("patientsite.css") as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 load_css()
 
@@ -89,8 +85,6 @@ if st.button("Submit"):
     df_new = pd.DataFrame(predictions)
 
     # add new row to csv
-    #with open('test_data.csv', mode='a', newline='') as f:
-    #    df_new.to_csv(f, header=False, index=False)
     with open('test_data.csv', mode='a', newline='') as f:
         # Write the new data as a single row
         f.write(f"{patient_id},{urgency_score}\n")
