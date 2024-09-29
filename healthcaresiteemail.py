@@ -18,10 +18,9 @@ st.markdown('<h1 class="title">Patient Appointment Scheduler</h1>', unsafe_allow
 uploaded_file = st.file_uploader("Upload your CSV file", type="csv", label_visibility="collapsed")
 num_weeks = st.number_input("Enter number of weeks for appointment scheduling:", min_value=1, value=1)
 
-# Function to send email
 def send_email(to_email, subject, body):
-    from_email = "ayahzaheraldeen@gmail.com"  # Your email address
-    from_password = "your_app_password"        # Your app password
+    from_email = "ayahzaheraldeen@gmail.com" 
+    from_password = "your_app_password"  
 
     msg = MIMEMultipart()
     msg['From'] = from_email
@@ -57,7 +56,6 @@ if uploaded_file is not None:
         df_sorted['appointment_date'] = sorted(appointment_dates)
         df_sorted['appointment_time'] = [random.choice(appointment_times) for _ in range(len(df_sorted))]
 
-        # Display appointments and get confirmation
         for index, row in df_sorted.iterrows():
             st.markdown(f"**Patient Email:** {row['email']}")
             st.markdown(f"**Appointment Date:** {row['appointment_date']}")
@@ -69,8 +67,6 @@ if uploaded_file is not None:
                 appointment_details = f"Dear Patient,\n\nYour appointment is scheduled for {row['appointment_date']} at {row['appointment_time']}.\n\nBest regards,\n Appoint AI Team"
                 send_email(row['email'], "Appointment Confirmation", appointment_details)
                 st.success("Appointment confirmed and email sent!")
-                # Optionally, you can break or continue here depending on your logic
-                break
 
         st.markdown('<h2 class="header">Sorted Patient List</h2>', unsafe_allow_html=True)
         st.write(df_sorted.to_html(classes='patient-list', index=False), unsafe_allow_html=True)
