@@ -8,15 +8,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Load model
 def load_model(model_path):
     model = tf.keras.models.load_model(model_path)
     return model
 
-# Function to send email
 def send_email(to_email, subject, body):
-    from_email = "ayahzaheraldeen@gmail.com"  # Your email address
-    from_password = "your_app_password"        # Your app password
+    from_email = "ayahzaheraldeen@gmail.com" 
+    from_password = "your_app_password"   
 
     msg = MIMEMultipart()
     msg['From'] = from_email
@@ -34,7 +32,6 @@ def send_email(to_email, subject, body):
     except Exception as e:
         print(f"Failed to send email to {to_email}: {e}")
 
-# Predicts urgency
 def predict_urgency(symptoms, tokenizer, model):
     sequences = tokenizer.texts_to_sequences([symptoms])
     X_input = pad_sequences(sequences, maxlen=100)
@@ -42,7 +39,7 @@ def predict_urgency(symptoms, tokenizer, model):
     prediction = model.predict(X_input)
     predicted_class_index = np.argmax(prediction, axis=1)[0]
     
-    return predicted_class_index + 1  # (1 to 5)
+    return predicted_class_index + 1  
 
 st.title("Patient Urgency Score Predictor")
 
@@ -57,7 +54,6 @@ model = load_model(model_path)
 with open("tokenizer.pkl", "rb") as f:
     tokenizer = pickle.load(f)
 
-# Patient input
 patient_name = st.text_input("Enter your name:")
 patient_age = st.text_input("Enter your age:")
 patient_symptoms = st.text_area("Describe your symptoms:")
@@ -67,17 +63,17 @@ if st.button("Submit"):
     urgency_score = predict_urgency(patient_symptoms, tokenizer, model)
     st.write(f"Predicted Urgency Score: {urgency_score}")
 
-    # Include email in the predictions
+
     predictions = [{"urgency_score": urgency_score, "email": patient_email}]
     df_new = pd.DataFrame(predictions)
 
-    # Add new row to CSV
+    
     with open('test_data.csv', mode='a', newline='') as f:
         df_new.to_csv(f, header=f.tell() == 0, index=False)  # Write header only if file is empty
 
     st.write("Your information has been saved!")
 
-    # Load appointment data
+    
     df_appointments = pd.read_csv('test_data.csv')  
     patient_appointment = df_appointments[df_appointments['email'] == patient_email]
 
@@ -85,7 +81,7 @@ if st.button("Submit"):
         st.write("Your Appointment Details:")
         st.write(patient_appointment)
 
-        # Confirmation buttons
+        
         confirm = st.button("Confirm Appointment")
         decline = st.button("Decline Appointment")
 
