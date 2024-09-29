@@ -1,25 +1,34 @@
-body {
-    background-color: #7ba9ef;
-    font-family: 'Arial', sans-serif;
+.stApp {
+    background-color: #f8f8f8;
+    /*font-family: 'Georgia', serif;*/
 }
-.title {
-    text-align: center;
-    color: #3b87c6e3; 
-    font-size: 2.5em;
+
+h1 {
+    text-align: center; 
+    font-family: 'Arima Madurai', sans-serif;
+    color: #093b6d; /
 }
+
+h2 {
+    text-align: center; 
+    font-family: 'Arima Madurai', sans-serif;
+    color: #093b6d; /
+}
+
+
 .header {
     text-align: center;
-    color: #ffffff;
+    color: #093b6d;
     margin-bottom: 20px;
 }
 .uploaded-file {
     text-align: center;
     margin: 20px;
     padding: 10px;
-    border: 2px dashed #3b87c6e3; 
+    border: 2px dashed #093b6d; 
     border-radius: 10px;
     background-color: #e7f3ff; 
-    color: #3b87c6e3; 
+    color: #093b6d; 
 }
 .patient-list {
     margin: 20px auto;
@@ -27,18 +36,18 @@ body {
     border-collapse: collapse;
 }
 .patient-list th, .patient-list td {
-    border: 1px solid #3b87c6e3;
+    border: 1px solid #093b6d;
     padding: 8px;
     text-align: center;
-    color: #343a40; 
+    color: #000000; 
 }
 .patient-list th {
-    background-color: #3b87c6e3; 
+    background-color: #093b6d; 
     color: white;
 }
 .patient-list tr {
-    background-color: #f1f1f1;
+    background-color: #f8f8f8;
 }
 .patient-list tr:hover {
-    background-color: #d1ecf1;
+    background-color: #f8f8f8;
 }

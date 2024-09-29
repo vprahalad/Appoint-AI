@@ -1,0 +1,42 @@
+.stApp {
+    background-color: #f8f8f8; 
+}
+
+h1 {
+    text-align: center; 
+    font-family: 'Arima Madurai', sans-serif;
+    color: #093b6d; /
+}
+
+h2 {
+    font-family: 'Garamond', serif; 
+    color: #093b6d; 
+}
+
+.stTextInput input {
+    font-family: 'Garamond', serif; 
+    color: black; 
+    background-color: #ffffff; 
+}
+
+.stTextArea textarea {
+    font-family: 'Garamond', serif; 
+    color: black; 
+    background-color: #ffffff; 
+}
+
+.stButton button {
+    font-family: 'Garamond', serif; 
+    color: #093b6d;
+    background-color: #ffffff; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+}
+
+.centered-image {
+    text-align: center;
+}
+
+.centered-image img {
+    width: 300px; 
+}
