@@ -7,7 +7,7 @@ def load_css(file_name):
     with open(file_name) as f:
         return f.read()
 
-css = load_css('app.css') 
+css = load_css('healthcaresite.css') 
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 col = st.columns(24)[7]  # 7th column
