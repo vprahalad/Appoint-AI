@@ -27,12 +27,26 @@ def predict_urgency(symptoms, tokenizer, model):
     
     return predicted_class_index + 1  # (1 to 5)
 
+col = st.columns(24)[7]  # 7th column
+with col:
+    st.image("logo.png", width=300)
+
+
 st.title("Patient Urgency Score Predictor")
 
-def load_css():
-    with open("style.css") as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+st.markdown(
+    """
+    <p style="font-family: 'Garamond', serif; color: black; font-size: 16px;">
+    <em> Note: This is for patients with Aetna insurance. If you carry a different type of insurance, please redirect to our home page. </em>
+    </p>
+    """,
+    unsafe_allow_html=True
+)
 
+
+def load_css():
+    with open("patientsite.css") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 load_css()
 
 model_path = 'model.keras' 
@@ -40,23 +54,40 @@ model = load_model(model_path)
 with open("tokenizer.pkl", "rb") as f:
     tokenizer = pickle.load(f)
 
+st.markdown(
+    """
+    <style>
+        .stTextInput label {
+            color: #093b6d;
+            font-family: 'Cambria', serif;
+        }
+        .stTextArea label {
+            color: #093b6d;
+            font-family: 'Cambria', serif;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # patient input
+patient_id = st.text_input("Enter your patient ID:")
 patient_name = st.text_input("Enter your name:")
 patient_age = st.text_input("Enter your age:")
-patient_id = st.text_input("Enter your ID:")
 patient_symptoms = st.text_area("Describe your symptoms:")
 
 if st.button("Submit"):
 
     urgency_score = predict_urgency(patient_symptoms, tokenizer, model)
-    st.write(f"Predicted Urgency Score: {urgency_score}")
+    st.write(f"Predicted Urgency Score: {urgency_score}/5")
     
     predictions = [{"patient_ID": patient_id, "urgency_score": urgency_score}]
     df_new = pd.DataFrame(predictions)
 
     # add new row to csv
     with open('test_data.csv', mode='a', newline='') as f:
-        df_new.to_csv(f, header=False, index=False)
+        # Write the new data as a single row
+        f.write(f"{patient_id},{urgency_score}\n")
     
-    st.write("Your information has been saved!")
+    
+    st.write("Your information has been saved! Please check the phone number you have on file to confirm your appointment.")

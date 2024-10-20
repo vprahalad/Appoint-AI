@@ -1,0 +1,52 @@
+.stApp {
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center; 
+    font-family: 'Arima Madurai', sans-serif;
+    color: #093b6d; /
+}
+
+h2 {
+    text-align: center; 
+    font-family: 'Arima Madurai', sans-serif;
+    color: #093b6d; /
+}
+
+
+.header {
+    text-align: center;
+    color: #093b6d;
+    margin-bottom: 20px;
+}
+.uploaded-file {
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+    border: 2px dashed #093b6d; 
+    border-radius: 10px;
+    background-color: #e7f3ff; 
+    color: #093b6d; 
+}
+.patient-list {
+    margin: 20px auto;
+    width: 80%;
+    border-collapse: collapse;
+}
+.patient-list th, .patient-list td {
+    border: 1px solid #093b6d;
+    padding: 8px;
+    text-align: center;
+    color: #000000; 
+}
+.patient-list th {
+    background-color: #093b6d; 
+    color: white;
+}
+.patient-list tr {
+    background-color: #f8f8f8;
+}
+.patient-list tr:hover {
+    background-color: #f8f8f8;
+}
